@@ -23,7 +23,7 @@
     @include('components.header')
     <div id="mid">
         @include('components.menu')
-        {{ $slot ?? '' }}
+        @yield('content')
         <br/><br/><br/><br/>
         <div id="side_info">
             @if (Auth::check())
