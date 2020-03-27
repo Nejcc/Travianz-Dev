@@ -1,7 +1,7 @@
 <?php
 
 Route::get('', 'HomeController@index')->name('index');
-Route::get('/test', 'HomeController@test')->name('index');
+
 
 Route::get('fields', 'FieldController@index')->name('fields')->middleware('village');
 Route::get('village', 'VillageController@index')->name('village')->middleware('village');

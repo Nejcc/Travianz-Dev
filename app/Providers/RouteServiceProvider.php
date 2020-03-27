@@ -37,6 +37,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         if ($this->app->isLocal()) {
             $this->mapInstallRoutes();
+            $this->mapTestingRoutes();
         }
 
         $this->mapApiRoutes();
@@ -48,6 +49,16 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapTutorialRoutes();
     }
 
+
+    /**
+     * @return void
+     */
+    protected function mapTestingRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/testing.php'));
+    }
 
     /**
      * @return void

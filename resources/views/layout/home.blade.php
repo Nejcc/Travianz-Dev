@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>{{ config('server.name') }}</title>
+    <title>{{ config('server.name') }} - @yield('title')</title>
     <link href="{{ asset('css/index/main.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/index/flaggs.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/index/main_en.css') }}" rel="stylesheet"/>

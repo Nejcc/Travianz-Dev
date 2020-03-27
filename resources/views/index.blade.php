@@ -1,7 +1,7 @@
 @extends('layout.home')
 
 @section('title')
-    Travian
+    home
 @endsection
 
 @section('content')

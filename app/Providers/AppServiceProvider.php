@@ -22,13 +22,15 @@ class AppServiceProvider extends ServiceProvider
     {
         date_default_timezone_set(config('server.timezone', 'Europe/Rome'));
 
-        Blade::include('index.footer', 'index_footer');
-        Blade::include('index.head', 'index_head');
-        Blade::include('manual.footer', 'manual_footer');
-        Blade::include('layout.head', 'game_head');
-        Blade::include('layout.header', 'game_header');
-        Blade::include('layout.footer', 'game_footer');
-        Blade::include('layout.menu', 'game_menu');
+        if (request()->segments(1) !== 'test') {
+            Blade::include('index.footer', 'index_footer');
+            Blade::include('index.head', 'index_head');
+            Blade::include('manual.footer', 'manual_footer');
+            Blade::include('layout.head', 'game_head');
+            Blade::include('layout.header', 'game_header');
+            Blade::include('layout.footer', 'game_footer');
+            Blade::include('layout.menu', 'game_menu');
+        }
 
         if (config('server.newsboxes.1')) {
             View::share('peace_type', [
@@ -41,11 +43,13 @@ class AppServiceProvider extends ServiceProvider
             ]);
         }
 
-        view()->composer('*', function (\Illuminate\Contracts\View\View $view) {
-            if (Auth::check()) {
-                $view->with('village', Auth::user()->selectedVillage->village);
-            }
-        });
+        if (request()->segments(1) !== 'test') {
+            view()->composer('*', function (\Illuminate\Contracts\View\View $view) {
+                if (Auth::check()) {
+                    $view->with('village', Auth::user()->selectedVillage->village);
+                }
+            });
+        }
     }
 
     /**
