@@ -35,12 +35,51 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
+        if ($this->app->isLocal()) {
+            $this->mapInstallRoutes();
+        }
+
         $this->mapApiRoutes();
+
+        $this->mapAuthRoutes();
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapTutorialRoutes();
     }
+
+
+    /**
+     * @return void
+     */
+    protected function mapAuthRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/auth.php'));
+    }
+
+
+    /**
+     * @return void
+     */
+    protected function mapInstallRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/install.php'));
+    }
+
+    /**
+     * @return void
+     */
+    protected function mapTutorialRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/tutorial.php'));
+    }
+
 
     /**
      * Define the "web" routes for the application.
@@ -52,8 +91,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
     }
 
     /**
@@ -66,8 +105,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
     }
 }
