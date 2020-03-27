@@ -19,7 +19,7 @@ class Profile extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id','gender', 'birthday', 'location', 'first_description', 'second_description'];
+    protected $fillable = ['user_id', 'gender', 'birthday', 'location', 'first_description', 'second_description'];
 
     /**
      * The attributes that aren't mass assignable.
