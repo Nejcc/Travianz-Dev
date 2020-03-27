@@ -55,7 +55,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->environment() !== 'production') {
+        if ($this->app->isLocal()) {
+            $this->app->register(TelescopeServiceProvider::class);
             $this->app->register(GeneratorsServiceProvider::class);
             $this->app->register(MigrationsGeneratorServiceProvider::class);
         }
